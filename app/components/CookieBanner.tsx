@@ -13,6 +13,12 @@ export function useCookieConsent(): Consent {
   useEffect(() => {
     const stored = localStorage.getItem(COOKIE_KEY) as Consent | null;
     if (stored) setConsent(stored);
+
+    const handler = (e: Event) => {
+      setConsent((e as CustomEvent<Consent>).detail);
+    };
+    window.addEventListener("cookieConsentUpdate", handler);
+    return () => window.removeEventListener("cookieConsentUpdate", handler);
   }, []);
 
   return consent;
@@ -39,6 +45,7 @@ export default function CookieBanner() {
   function accept(type: "all" | "essential") {
     localStorage.setItem(COOKIE_KEY, type);
     setCookie(COOKIE_KEY, type, 365);
+    window.dispatchEvent(new CustomEvent("cookieConsentUpdate", { detail: type }));
     setVisible(false);
   }
 
