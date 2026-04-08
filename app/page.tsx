@@ -95,32 +95,27 @@ const fadeUp = {
 type PricePlan = {
   name: string;
   badge?: string;
-  price: string;
-  unit: string;
+  tag: string;
   videos: string;
   desc: string;
   features: string[];
-  cta: string;
   highlighted?: boolean;
 };
 
 const plans: PricePlan[] = [
   {
-    name: "Starter",
-    price: "149€",
-    unit: "/ mes",
+    name: "Prueba",
+    tag: "Ideal para empezar",
     videos: "10 vídeos",
-    desc: "Para probar el formato sin hipotecarte.",
+    desc: "Valida el formato UGC con tu producto sin comprometerte a largo plazo.",
     features: ["10 vídeos UGC/mes (9–15s)", "1 avatar", "2 rondas de ajustes", "Entrega 72h"],
-    cta: "Quiero Starter",
   },
   {
-    name: "Growth",
-    badge: "Mejor relación valor/precio",
-    price: "399€",
-    unit: "/ mes",
+    name: "Escalado",
+    badge: "El más elegido",
+    tag: "Para crecer con paid social",
     videos: "30 vídeos",
-    desc: "El punto dulce para escalar anuncios y tests.",
+    desc: "El volumen justo para testear hooks, iterar creatividades y escalar lo que funciona.",
     features: [
       "30 vídeos/mes (9–20s)",
       "2 avatares",
@@ -128,15 +123,13 @@ const plans: PricePlan[] = [
       "Prioridad de entrega",
       "Soporte por WhatsApp",
     ],
-    cta: "Quiero Growth",
     highlighted: true,
   },
   {
-    name: "Scale",
-    price: "799€",
-    unit: "/ mes",
+    name: "Marca seria",
+    tag: "Para ir a fondo",
     videos: "80 vídeos",
-    desc: "Para marcas que van en serio con paid social.",
+    desc: "Estrategia creativa completa para marcas que viven del paid social.",
     features: [
       "80 vídeos/mes (9–30s)",
       "3 avatares",
@@ -144,7 +137,6 @@ const plans: PricePlan[] = [
       "Sistema de iteración semanal",
       "Revisión de copys y ángulos",
     ],
-    cta: "Quiero Scale",
   },
 ];
 
@@ -211,17 +203,14 @@ function PricingCard({ plan }: { plan: PricePlan }) {
         <div className="flex items-start justify-between gap-3">
           <div>
             <h3 className="text-xl font-semibold text-white">{plan.name}</h3>
-            <p className="mt-1 text-sm text-white/60">{plan.desc}</p>
+            <p className="mt-1 text-xs text-white/50 uppercase tracking-widest">{plan.tag}</p>
           </div>
           <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
             {plan.videos}
           </span>
         </div>
 
-        <div className="mt-6 flex items-end gap-2">
-          <div className="text-4xl font-semibold tracking-tight text-white">{plan.price}</div>
-          <div className="pb-1 text-sm text-white/60">{plan.unit}</div>
-        </div>
+        <p className="mt-4 text-sm text-white/60 leading-relaxed">{plan.desc}</p>
 
         <ul className="mt-6 space-y-3">
           {plan.features.map((f) => (
@@ -234,19 +223,7 @@ function PricingCard({ plan }: { plan: PricePlan }) {
           ))}
         </ul>
 
-        <button
-          onClick={() => scrollToId("contacto")}
-          className={cn(
-            "mt-7 w-full rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200",
-            isHot
-              ? "bg-white text-black hover:bg-white/90 shadow-[0_0_20px_rgba(255,255,255,0.15)]"
-              : "bg-white/[0.06] text-white/80 hover:bg-white/10 border border-white/[0.08]"
-          )}
-        >
-          {plan.cta}
-        </button>
-
-        <p className="mt-4 text-center text-xs text-white/45">Cancelas cuando quieras. Nadie te va a perseguir.</p>
+        <p className="mt-4 text-center text-xs text-white/45">Presupuesto personalizado · Sin compromiso</p>
       </div>
     </motion.div>
   );
@@ -643,7 +620,7 @@ export default function Page() {
               Servicios
             </button>
             <button onClick={() => scrollToId("precios")} className="hover:text-white transition">
-              Precios
+              Planes
             </button>
             <button onClick={() => scrollToId("caso")} className="hover:text-white transition">
               Caso
@@ -867,7 +844,7 @@ export default function Page() {
             viewport={{ once: true, amount: 0.2 }}
             className="grid gap-10"
           >
-            <SectionTitle label="Planes" title="Precios" subtitle="Pagas por output. Sin contratos eternos, sin sorpresas." />
+            <SectionTitle label="Planes" title="¿Qué necesitas?" subtitle="Cada marca es diferente. Te hacemos una propuesta a medida, sin sorpresas." />
 
             <div className="grid gap-5 lg:grid-cols-3 lg:items-stretch">
               {plans.map((p) => (
@@ -877,7 +854,17 @@ export default function Page() {
               ))}
             </div>
 
-            <div className="mt-6 h-px w-full bg-white/10" />
+            <div className="flex flex-col items-center gap-4 pt-4">
+              <button
+                onClick={() => scrollToId("contacto")}
+                className="rounded-full bg-white px-8 py-4 text-sm font-semibold text-black hover:bg-white/90 transition shadow-[0_0_30px_rgba(255,255,255,0.12)]"
+              >
+                Pide tu presupuesto personalizado
+              </button>
+              <p className="text-xs text-white/40">Sin compromiso. Te respondemos en menos de 24h.</p>
+            </div>
+
+            <div className="mt-2 h-px w-full bg-white/10" />
           </motion.div>
         </section>
 
@@ -951,7 +938,7 @@ export default function Page() {
             </button>
             <div className="flex gap-6 text-white/55">
               <button onClick={() => scrollToId("servicios")} className="hover:text-white transition">Servicios</button>
-              <button onClick={() => scrollToId("precios")} className="hover:text-white transition">Precios</button>
+              <button onClick={() => scrollToId("precios")} className="hover:text-white transition">Planes</button>
               <button onClick={() => scrollToId("caso")} className="hover:text-white transition">Caso</button>
               <button onClick={() => scrollToId("contacto")} className="hover:text-white transition">Contacto</button>
             </div>
