@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import LeadModal from "./components/LeadModal";
-import { motion, useReducedMotion, useMotionValue, useMotionTemplate } from "framer-motion";
+import { motion, useReducedMotion, useMotionValue, useMotionTemplate, useScroll, useTransform } from "framer-motion";
 
 function GeminiGlobalSpotlight() {
   const mouseX = useMotionValue(-1000);
@@ -678,6 +678,10 @@ export default function Page() {
   const WHATSAPP_TEXT = encodeURIComponent(`Hola ${BRAND}, quiero ver una demo de contenido IA para mi negocio.`);
   const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_TEXT}`;
 
+  const { scrollY } = useScroll();
+  const orbOpacity = useTransform(scrollY, [0, 420], [1, 0]);
+  const orbScale   = useTransform(scrollY, [0, 600], [1, 0.8]);
+
   const affBtnRef = useRef<HTMLButtonElement | null>(null);
   const affMenuRef = useRef<HTMLDivElement | null>(null);
   const [affOpen, setAffOpen] = useState(false);
@@ -749,27 +753,28 @@ export default function Page() {
         </div>
       </header>
 
-      {/* ORB INTRO — pantalla completa, solo el orbe */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
-        <video
-          className="w-[620px] h-[620px] object-cover opacity-90"
+      {/* ORB INTRO — sticky, se queda fijo mientras el hero sube sobre él */}
+      <section className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-black" style={{ zIndex: 0 }}>
+        <motion.video
+          className="w-[560px] h-[560px] object-cover"
+          style={{ opacity: orbOpacity, scale: orbScale }}
           src="/logo.mp4"
           autoPlay
           muted
           loop
           playsInline
         />
-        {/* Fade bottom */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-52 bg-gradient-to-b from-transparent to-black" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-b from-transparent to-black" />
       </section>
 
-      {/* HERO */}
-      <main id="top" className="relative">
+      {/* HERO — bg-black para cubrir el orbe al hacer scroll */}
+      <main id="top" className="relative bg-black" style={{ zIndex: 10 }}>
         <section className="mx-auto max-w-6xl px-5 pt-14 md:pt-20">
           <motion.div
             variants={container}
             initial={reduce ? "show" : "hidden"}
-            animate="show"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
             className="grid items-center gap-12 md:grid-cols-2"
           >
             <motion.div variants={appleIn} className="max-w-xl">
