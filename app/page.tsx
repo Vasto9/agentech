@@ -135,6 +135,8 @@ const plans: PricePlan[] = [
     unit: "/ mes",
     desc: "Para marcas que van en serio y necesitan contenido sin límite.",
     features: [
+      "20 vídeos hiperrealistas / mes",
+      "40 imágenes fotorrealistas / mes",
       "Estrategia de contenido mensual",
       "Contacto directo con el equipo",
       "Reunión mensual de resultados",
