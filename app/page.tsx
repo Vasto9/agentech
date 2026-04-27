@@ -751,6 +751,20 @@ export default function Page() {
 
       {/* HERO */}
       <main id="top" className="relative">
+
+        {/* Orb background video */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <video
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover opacity-[0.18]"
+            src="/logo.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,transparent_40%,rgba(0,0,0,0.7)_100%)]" />
+        </div>
+
         <section className="mx-auto max-w-6xl px-5 pt-14 md:pt-20">
           <motion.div
             variants={container}
