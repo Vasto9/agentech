@@ -749,22 +749,22 @@ export default function Page() {
         </div>
       </header>
 
+      {/* ORB INTRO — pantalla completa, solo el orbe */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+        <video
+          className="w-[620px] h-[620px] object-cover opacity-90"
+          src="/logo.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+        {/* Fade bottom */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-52 bg-gradient-to-b from-transparent to-black" />
+      </section>
+
       {/* HERO */}
       <main id="top" className="relative">
-
-        {/* Orb background video — hero only */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-screen overflow-hidden">
-          <video
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] object-cover opacity-[0.35]"
-            src="/logo.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,black_100%)]" />
-        </div>
-
         <section className="mx-auto max-w-6xl px-5 pt-14 md:pt-20">
           <motion.div
             variants={container}
