@@ -690,33 +690,36 @@ export default function Page() {
   useOnClickOutside([affBtnRef, affMenuRef], () => setAffOpen(false), affOpen);
 
   const [typed, setTyped] = useState("");
-  const [showSubtitle, setShowSubtitle] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
 
   useEffect(() => {
-    if (reduce) { setTyped(ORB_HEADLINE); setShowSubtitle(true); return; }
-
     let active = true;
-    const t0 = window.setTimeout(() => { if (active) setShowSkip(true); }, 1500);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let iv: any;
+
+    // Show skip button after 800ms
+    const t0 = window.setTimeout(() => { if (active) setShowSkip(true); }, 800);
+
+    // Start typewriter after 400ms
     const t1 = window.setTimeout(() => {
       if (!active) return;
       let i = 0;
-      const iv = window.setInterval(() => {
+      iv = window.setInterval(() => {
         if (!active) { window.clearInterval(iv); return; }
         i++;
         setTyped(ORB_HEADLINE.slice(0, i));
         if (i >= ORB_HEADLINE.length) {
           window.clearInterval(iv);
-          window.setTimeout(() => { if (active) setShowSubtitle(true); }, 250);
+          // Auto-scroll 500ms after typewriter finishes
           window.setTimeout(() => {
             if (active) document.getElementById("top")?.scrollIntoView({ behavior: "smooth" });
-          }, 2750);
+          }, 500);
         }
-      }, 50);
-    }, 1000);
+      }, 28);
+    }, 400);
 
-    return () => { active = false; window.clearTimeout(t0); window.clearTimeout(t1); };
-  }, [reduce]);
+    return () => { active = false; window.clearTimeout(t0); window.clearTimeout(t1); window.clearInterval(iv); };
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setAffOpen(false); };
@@ -807,16 +810,6 @@ export default function Page() {
               <span className="inline-block w-[2px] h-[0.85em] bg-white/70 ml-1 align-middle animate-pulse" />
             )}
           </h2>
-          {showSubtitle && (
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mt-4 text-white/50 text-base md:text-lg max-w-md px-6"
-            >
-              Sin rodajes. Sin esperas. Sin pagar una fortuna.
-            </motion.p>
-          )}
         </motion.div>
 
         {/* Skip button */}
