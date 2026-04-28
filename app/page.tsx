@@ -59,6 +59,21 @@ import {
 
 const ORB_HEADLINE = "Tu negocio con imagen de marca premium.";
 
+function appleScrollTo(targetY: number, duration = 1100) {
+  const startY = window.scrollY;
+  const distance = targetY - startY;
+  const startTime = performance.now();
+  // easeInOutQuart — the curve Apple uses on most scroll transitions
+  const ease = (t: number) =>
+    t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+  function step(now: number) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    window.scrollTo(0, startY + distance * ease(progress));
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
 const BRAND = "AgenciaTech";
 const WHATSAPP_NUMBER = "34722603447";
 
@@ -712,7 +727,7 @@ export default function Page() {
           window.clearInterval(iv);
           // Auto-scroll 500ms after typewriter finishes
           window.setTimeout(() => {
-            if (active) document.getElementById("top")?.scrollIntoView({ behavior: "smooth" });
+            if (active) { const el = document.getElementById("top"); if (el) appleScrollTo(el.offsetTop); }
           }, 500);
         }
       }, 28);
@@ -819,7 +834,7 @@ export default function Page() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
             className="absolute bottom-8 right-8 text-white/35 text-xs hover:text-white/60 transition uppercase tracking-widest"
-            onClick={() => document.getElementById("top")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => { const el = document.getElementById("top"); if (el) appleScrollTo(el.offsetTop); }}
           >
             Saltar ↓
           </motion.button>
