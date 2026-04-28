@@ -57,6 +57,8 @@ import {
   Play,
 } from "lucide-react";
 
+const ORB_HEADLINE = "Tu negocio con imagen de marca premium.";
+
 const BRAND = "AgenciaTech";
 const WHATSAPP_NUMBER = "34722603447";
 
@@ -687,6 +689,35 @@ export default function Page() {
   const [affOpen, setAffOpen] = useState(false);
   useOnClickOutside([affBtnRef, affMenuRef], () => setAffOpen(false), affOpen);
 
+  const [typed, setTyped] = useState("");
+  const [showSubtitle, setShowSubtitle] = useState(false);
+  const [showSkip, setShowSkip] = useState(false);
+
+  useEffect(() => {
+    if (reduce) { setTyped(ORB_HEADLINE); setShowSubtitle(true); return; }
+
+    let active = true;
+    const t0 = window.setTimeout(() => { if (active) setShowSkip(true); }, 1500);
+    const t1 = window.setTimeout(() => {
+      if (!active) return;
+      let i = 0;
+      const iv = window.setInterval(() => {
+        if (!active) { window.clearInterval(iv); return; }
+        i++;
+        setTyped(ORB_HEADLINE.slice(0, i));
+        if (i >= ORB_HEADLINE.length) {
+          window.clearInterval(iv);
+          window.setTimeout(() => { if (active) setShowSubtitle(true); }, 250);
+          window.setTimeout(() => {
+            if (active) document.getElementById("top")?.scrollIntoView({ behavior: "smooth" });
+          }, 2750);
+        }
+      }, 50);
+    }, 1000);
+
+    return () => { active = false; window.clearTimeout(t0); window.clearTimeout(t1); };
+  }, [reduce]);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setAffOpen(false); };
     document.addEventListener("keydown", onKey);
@@ -764,6 +795,43 @@ export default function Page() {
           loop
           playsInline
         />
+
+        {/* Typewriter text overlay */}
+        <motion.div
+          className="absolute inset-x-0 bottom-0 flex flex-col items-center pb-24 text-center pointer-events-none"
+          style={{ opacity: orbOpacity }}
+        >
+          <h2 className="text-3xl md:text-[2.4rem] font-semibold tracking-[-0.02em] text-white max-w-xl px-6 leading-tight min-h-[1.3em]">
+            {typed}
+            {typed.length > 0 && typed.length < ORB_HEADLINE.length && (
+              <span className="inline-block w-[2px] h-[0.85em] bg-white/70 ml-1 align-middle animate-pulse" />
+            )}
+          </h2>
+          {showSubtitle && (
+            <motion.p
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mt-4 text-white/50 text-base md:text-lg max-w-md px-6"
+            >
+              Sin rodajes. Sin esperas. Sin pagar una fortuna.
+            </motion.p>
+          )}
+        </motion.div>
+
+        {/* Skip button */}
+        {showSkip && (
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="absolute bottom-8 right-8 text-white/35 text-xs hover:text-white/60 transition uppercase tracking-widest"
+            onClick={() => document.getElementById("top")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            Saltar ↓
+          </motion.button>
+        )}
+
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-b from-transparent to-black" />
       </section>
 
