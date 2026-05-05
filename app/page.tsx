@@ -198,28 +198,28 @@ function HeroSection() {
         {/* Right — visual grid */}
         <motion.div variants={fadeUp} className="relative">
           <div className="grid grid-cols-2 gap-3">
-            {/* Main image placeholder — on-model */}
-            <div className="col-span-2 gemini-card rounded-3xl border border-white/10 bg-white/[0.03] overflow-hidden aspect-[16/9] flex flex-col items-center justify-center gap-3 backdrop-blur-xl">
-              <video
-                src="/demo2.mp4"
-                autoPlay muted loop playsInline
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Secondary placeholders */}
-            <div className="gemini-card rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden aspect-[3/4] flex items-center justify-center backdrop-blur-xl">
+            {/* Portrait videos — natural 9:16 ratio, no crop */}
+            <div className="gemini-card rounded-2xl border border-white/10 bg-black overflow-hidden aspect-[9/16] relative backdrop-blur-xl">
               <video
                 src="/story.mp4"
                 autoPlay muted loop playsInline
                 className="w-full h-full object-cover"
               />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3">
+                <span className="text-[10px] text-white/70 font-medium">Lifestyle · Reel</span>
+              </div>
             </div>
-            <div className="gemini-card rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden aspect-[3/4] flex items-center justify-center backdrop-blur-xl">
+            <div className="gemini-card rounded-2xl border border-white/10 bg-black overflow-hidden aspect-[9/16] relative backdrop-blur-xl">
               <video
                 src="/objecion.mp4"
                 autoPlay muted loop playsInline
                 className="w-full h-full object-cover"
               />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3">
+                <span className="text-[10px] text-white/70 font-medium">Meta Ads · 9:16</span>
+              </div>
             </div>
           </div>
           {/* Badge */}
@@ -316,14 +316,11 @@ function SolucionSection() {
     { icon: <Zap className="h-4 w-4" />, text: "Entrega en 48 horas desde aprobación del brief" },
   ];
 
-  // Placeholder grid items simulating fashion editorial content
+  // Video grid items for solution section
   const gridItems = [
-    { label: "On-model · SS25", color: "#7B3FE4" },
-    { label: "Lookbook · Colección", color: "#a855f7" },
-    { label: "Meta Ads · 9:16", color: "#7B3FE4" },
-    { label: "Lifestyle · Editorial", color: "#c084fc" },
-    { label: "Variante · Blanco/Negro", color: "#7B3FE4" },
-    { label: "Ecommerce · PDP", color: "#a855f7" },
+    { src: "/story.mp4", label: "On-model · SS25", badge: "Foto" },
+    { src: "/objecion.mp4", label: "Meta Ads · 9:16", badge: "Vídeo" },
+    { src: "/demo2.mp4", label: "Lifestyle · Editorial", badge: "Reel" },
   ];
 
   return (
@@ -367,20 +364,27 @@ function SolucionSection() {
           </motion.div>
         </div>
 
-        {/* Right — placeholder grid */}
+        {/* Right — video grid */}
         <motion.div variants={fadeUp} className="grid grid-cols-3 gap-2">
           {gridItems.map((item, i) => (
             <div
               key={i}
-              className="gemini-card rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden"
-              style={{ aspectRatio: "3/4" }}
+              className="gemini-card rounded-2xl border border-white/10 bg-black backdrop-blur-xl overflow-hidden relative"
+              style={{ aspectRatio: "9/16" }}
             >
-              <div className="w-full h-full flex flex-col items-center justify-end p-3"
-                style={{
-                  background: `linear-gradient(180deg, ${item.color}18 0%, #0a0a0a 100%)`,
-                }}
-              >
-                <span className="text-[9px] font-mono text-white/30 text-center leading-tight">{item.label}</span>
+              <video
+                src={item.src}
+                autoPlay muted loop playsInline
+                className="w-full h-full object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+              <div className="absolute top-2 right-2">
+                <span className="rounded-full border border-white/15 bg-black/50 px-2 py-0.5 text-[9px] text-white/60 backdrop-blur font-mono">
+                  {item.badge}
+                </span>
+              </div>
+              <div className="absolute bottom-2 left-2 right-2">
+                <span className="text-[9px] font-medium text-white/65 text-center block leading-tight">{item.label}</span>
               </div>
             </div>
           ))}
