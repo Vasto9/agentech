@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es">
       <head>
         <title>Agencia Tech — Contenido Visual IA para Marcas de Moda</title>
-        <meta name="description" content="Producimos fotos de modelo, lookbooks y vídeos hiperrealistas con IA para tu ecommerce de moda. Entrega en 48 horas. Sin sesiones de fotos. Sin esperar semanas." />
+        <meta name="description" content="Fotos on-model y vídeo hiperrealista con IA a partir de tus prendas, listos en 48 horas. Sin sesión de fotos. Agenda 15 minutos y te enseñamos una demo con tu producto." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:title" content="Agencia Tech — Contenido Visual IA para Marcas de Moda" />
         <meta property="og:description" content="Fotos de modelo, lookbooks y vídeos hiperrealistas con IA. Entrega en 48 horas." />

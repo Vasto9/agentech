@@ -53,7 +53,7 @@ export default function LeadModal({
 
       // Abrir WhatsApp con datos pre-rellenos
       const msg = encodeURIComponent(
-        `Hola, soy ${form.name}. Quiero presupuesto.\nEmail: ${form.email}\nMensaje: ${form.message || "-"}`
+        `Hola, soy ${form.name}. Quiero agendar una llamada de 15 min y ver una demo con mi producto.\nEmail: ${form.email}\nMensaje: ${form.message || "-"}`
       );
       window.open(`https://wa.me/34722603447?text=${msg}`, "_blank");
 
@@ -98,13 +98,13 @@ export default function LeadModal({
                 <div>
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-1 text-[11px] font-medium text-violet-300">
                     <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
-                    Pide presupuesto
+                    Agenda tu demo
                   </span>
                   <h3 className="mt-4 text-xl font-semibold tracking-tight text-white">
-                    Cuéntanos tu proyecto
+                    Reserva tu llamada de 15 min
                   </h3>
                   <p className="mt-1.5 text-sm text-white/40">
-                    Te respondemos en menos de 24h con una propuesta.
+                    Te escribo y agendamos 15 minutos para enseñarte una demo con tu producto.
                   </p>
                 </div>
                 <button
@@ -148,7 +148,7 @@ export default function LeadModal({
                 <label className="grid gap-1.5">
                   <span className="text-xs text-white/40">Mensaje <span className="text-white/20">(opcional)</span></span>
                   <textarea
-                    placeholder="Cuéntanos tu producto, objetivo o lo que necesitas..."
+                    placeholder="Cuéntame tu marca, tu producto o qué te gustaría ver en la demo..."
                     value={form.message}
                     onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
                     rows={3}
@@ -182,7 +182,7 @@ export default function LeadModal({
                     disabled={loading}
                     className="flex-1 rounded-full bg-white py-3 text-sm font-semibold text-black transition hover:bg-white/90 disabled:opacity-50"
                   >
-                    {loading ? "Enviando..." : "Enviar"}
+                    {loading ? "Enviando..." : "Reservar mi llamada"}
                   </button>
                   <button
                     type="button"

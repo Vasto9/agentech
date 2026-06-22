@@ -148,24 +148,25 @@ function HeroSection() {
         {/* Left — copy */}
         <div>
           <motion.div variants={fadeUp}>
-            <Pill>Moda DTC · Entrega en 48 horas</Pill>
+            <Pill>Moda DTC · Demo gratis con tu producto</Pill>
           </motion.div>
 
           <motion.h1
             variants={fadeUp}
             className="mt-7 text-[2.8rem] md:text-[3.8rem] lg:text-[4.2rem] font-semibold tracking-[-0.03em] leading-[1.06]"
           >
-            <span className="text-gradient">Tu marca de moda merece contenido que venda.</span>
+            <span className="text-gradient">Produce el contenido de tu marca sin montar una sola sesión de fotos.</span>
             <br />
-            <span className="text-white/35">Sin sesiones de fotos.<br />Sin esperar semanas.</span>
+            <span className="text-white/35">Fotos on-model y vídeo hiperrealista con IA.<br />Listos en 48 horas.</span>
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
             className="mt-6 text-base md:text-lg text-white/50 leading-relaxed max-w-lg"
           >
-            Producimos fotos de modelo, lookbooks y vídeos hiperrealistas con IA para tu ecommerce.
-            Indistinguibles de una producción real. Entrega en 48 horas.
+            Cada sesión con modelo se va a 2.500–6.000€ y las creatividades se queman en Meta en
+            menos de 3 semanas. Generamos fotos on-model y vídeo a partir de tus propias prendas,
+            indistinguibles de una sesión real. Agenda 15 minutos y te lo enseño con tu producto.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-9 flex flex-wrap gap-3">
@@ -175,23 +176,23 @@ function HeroSection() {
               rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-black hover:bg-white/90 transition"
             >
-              Agenda tu llamada estratégica <ArrowRight className="h-4 w-4" />
+              Agenda 15 min y te enseño una demo <ArrowRight className="h-4 w-4" />
             </a>
             <button
               onClick={() => scrollToId("resultados")}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3.5 text-sm font-medium text-white/80 hover:bg-white/[0.08] hover:text-white transition"
             >
-              <Play className="h-3.5 w-3.5" /> Ver demo gratuita
+              <Play className="h-3.5 w-3.5" /> Ver ejemplos reales
             </button>
           </motion.div>
 
           <div className="mt-10 premium-divider" />
 
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-6 text-xs text-white/40">
+            <span className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-purple-400" /> Demo gratis con tu producto</span>
             <span className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-purple-400" /> Entrega en 48 horas</span>
-            <span className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-purple-400" /> Sin permanencia</span>
             <span className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-purple-400" /> Listo para Meta Ads</span>
-            <span className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-purple-400" /> Variantes incluidas</span>
+            <span className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-purple-400" /> Sin permanencia</span>
           </motion.div>
         </div>
 
@@ -238,8 +239,8 @@ function ProblemaSection() {
   const pains = [
     {
       icon: <Camera className="h-5 w-5" />,
-      title: "Cada sesión de fotos te cuesta 2.000–4.000€",
-      desc: "Entre la modelo, el fotógrafo, el estudio y el post-producción, el precio se dispara antes de publicar una sola imagen.",
+      title: "Cada sesión de fotos te cuesta 2.500–6.000€",
+      desc: "Entre la modelo, el fotógrafo, el estudio y la post-producción, el precio se dispara antes de publicar una sola imagen.",
     },
     {
       icon: <Clock className="h-5 w-5" />,
@@ -269,8 +270,8 @@ function ProblemaSection() {
     >
       <SectionTitle
         label="El problema"
-        title="El problema de producir contenido de moda en 2025"
-        subtitle="Si vendes moda online, ya lo sabes. Producir contenido de calidad de forma constante es caro, lento e insostenible."
+        title="Producir contenido de moda en 2026 te está costando demasiado"
+        subtitle="Si vendes moda online, ya lo sabes. Mantener contenido de calidad de forma constante es caro, lento e insostenible con producción tradicional."
       />
 
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -337,8 +338,8 @@ function SolucionSection() {
         <div>
           <SectionTitle
             label="La solución"
-            title="Producción Visual IA: mismo resultado, sin el circo"
-            subtitle="Reemplazamos la sesión de fotos entera. Modelos, estudio, fotógrafo y post-producción incluidos."
+            title="Producción Visual con IA: mismo resultado, sin la sesión de fotos"
+            subtitle="Trabajamos a partir de tus prendas reales y reemplazamos la sesión entera. Modelos, estudio, fotógrafo y post-producción incluidos. Todo pasa revisión humana antes de entregarse."
           />
 
           <motion.ul variants={container} className="mt-8 space-y-3">
@@ -359,7 +360,7 @@ function SolucionSection() {
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-white/90 transition"
             >
-              Quiero una demo de mi marca <ArrowRight className="h-4 w-4" />
+              Quiero ver una demo con mi producto <ArrowRight className="h-4 w-4" />
             </a>
           </motion.div>
         </div>
@@ -466,7 +467,7 @@ function ComparativaSection() {
           rel="noreferrer"
           className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-white/90 transition"
         >
-          Agenda una llamada sin compromiso <ArrowRight className="h-4 w-4" />
+          Agenda 15 min y decídelo viéndolo <ArrowRight className="h-4 w-4" />
         </a>
       </motion.div>
     </motion.section>
@@ -478,8 +479,8 @@ function ComoFuncionaSection() {
   const steps = [
     {
       number: "01",
-      title: "Llamada estratégica",
-      desc: "Analizamos tu marca, tu catálogo y tus objetivos. En 30 minutos definimos exactamente qué contenido necesitas y para qué canal.",
+      title: "Llamada de 15 min + demo con tu producto",
+      desc: "Analizamos tu marca y tu catálogo, y te enseñamos una demo real con una de tus prendas. En 15 minutos ves el antes y el después y decides si te encaja.",
     },
     {
       number: "02",
@@ -545,22 +546,22 @@ function ResultadosSection() {
 
   const cases = [
     {
-      brand: "Marca de ropa DTC",
-      sector: "Ropa · Ecommerce",
-      quote: "Pasamos de publicar 4 piezas al mes a 20. El coste por adquisición bajó un 31% en 60 días.",
-      metric: "−31% CPA en 60 días",
+      brand: "Más creatividades, menos CPA",
+      sector: "Meta Ads · Escala",
+      quote: "Las marcas que testan más de 20 creatividades al mes consiguen mejor ROAS que las que suben 5. El cuello de botella casi nunca es el media buyer: es la producción.",
+      metric: "20+ creatividades/mes",
     },
     {
-      brand: "Marca de accesorios",
-      sector: "Accesorios · Moda",
-      quote: "Lanzamos una colección completa en 3 días. Antes necesitábamos 3 semanas solo para coordinar la sesión.",
-      metric: "Colección completa en 72h",
+      brand: "La colección, cuando está lista",
+      sector: "Lanzamientos · Velocidad",
+      quote: "El calendario deja de marcarlo la sesión de fotos. Lanzas cada prenda cuando está lista, no cuando toca el siguiente shooting. Una colección entera fotografiada en días, no en semanas.",
+      metric: "Colección en 72h",
     },
     {
-      brand: "Ecommerce de moda sostenible",
-      sector: "Moda · Sostenibilidad",
-      quote: "El contenido IA es indistinguible del real. Nuestros clientes no notan la diferencia y nuestro ROAS mejoró un 40%.",
-      metric: "+40% ROAS",
+      brand: "Todo el catálogo, no solo 10 SKUs",
+      sector: "Catálogo · Conversión",
+      quote: "El on-model es lo que vende; el fondo blanco solo enseña. A partir de tus fotos de producto generamos versiones on-model y lifestyle para cada referencia, sin reshoot.",
+      metric: "Cada SKU con contenido",
     },
   ];
 
@@ -575,8 +576,8 @@ function ResultadosSection() {
     >
       <SectionTitle
         label="Resultados"
-        title="Marcas que ya producen con IA"
-        subtitle="Números reales de marcas de moda que sustituyeron la producción tradicional."
+        title="Lo que cambia cuando produces así"
+        subtitle="No te pido que te lo creas: en la llamada te enseño una demo con tu producto y los números reales detrás de cada caso."
       />
 
       {/* Metrics */}
@@ -609,7 +610,7 @@ function ResultadosSection() {
                 {c.metric}
               </span>
             </div>
-            <p className="text-xs text-white/55 leading-relaxed italic flex-1">"{c.quote}"</p>
+            <p className="text-xs text-white/55 leading-relaxed flex-1">{c.quote}</p>
           </motion.div>
         ))}
       </div>
@@ -670,10 +671,11 @@ function CtaFinalSection() {
           <SectionLabel>Siguiente paso</SectionLabel>
 
           <h2 className="text-3xl md:text-[2.8rem] font-semibold tracking-[-0.025em] text-gradient leading-tight max-w-2xl mx-auto">
-            ¿Listo para dejar de depender de producciones físicas?
+            Mira una demo con tu propio producto antes de decidir nada.
           </h2>
           <p className="mt-4 text-white/45 text-base leading-relaxed max-w-lg mx-auto">
-            Agenda una llamada de 15 minutos. Sin compromiso. Te mostramos una demo real con tu producto.
+            Agenda 15 minutos, sin compromiso. Te enseño una demo real con tus prendas y el antes y el después.
+            Si no te encaja, lo entiendo y aquí lo dejamos. Pero se entiende en 2 minutos.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
