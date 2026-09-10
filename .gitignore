@@ -39,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+app/page.tsx.bak-moda
+public/vsl-poster-antiguo.jpg

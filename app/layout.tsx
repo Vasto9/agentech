@@ -13,11 +13,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <head>
-        <title>Agencia Tech — Contenido Visual IA para Marcas de Moda</title>
-        <meta name="description" content="Fotos on-model y vídeo hiperrealista con IA a partir de tus prendas, listos en 48 horas. Sin sesión de fotos. Agenda 15 minutos y te enseñamos una demo con tu producto." />
+        <title>Agencia Tech — Anuncios con IA para marcas que invierten en Meta</title>
+        <meta name="description" content="Cuarenta anuncios nuevos al mes en tres días, sin sesión de fotos ni modelos. Superamos a tu mejor anuncio en 30 días o seguimos produciendo sin cobrarte." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="Agencia Tech — Contenido Visual IA para Marcas de Moda" />
-        <meta property="og:description" content="Fotos de modelo, lookbooks y vídeos hiperrealistas con IA. Entrega en 48 horas." />
+        <meta property="og:title" content="Agencia Tech — Anuncios con IA para marcas que invierten en Meta" />
+        <meta property="og:description" content="Cuarenta anuncios nuevos al mes, en tres días. Sin sesión de fotos." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://agenciatech.es" />
         <meta property="og:image" content="https://agenciatech.es/logo.png" />
