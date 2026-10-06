@@ -5,12 +5,12 @@ import { motion, MotionConfig, useMotionValue, useMotionTemplate } from "framer-
 import {
   Camera, Clock, RefreshCw, TrendingUp, Check, X, ArrowRight,
   Mail, ChevronRight, ChevronDown,
-  Package, BookOpen, Play, Layers, Zap, ShieldCheck,
+  Package, BookOpen, Play, Pause, Layers, Zap, ShieldCheck,
 } from "lucide-react";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 const BRAND = "Agencia Tech";
-const CALENDLY = "https://calendly.com/agenciatech-ia/30min";
+const CALENDLY = "https://calendly.com/agenciatech-ia/15min";
 const EMAIL = "massimo@agenciatech.es";
 const IG = "https://instagram.com/agenciatech__";
 const LINKEDIN = "https://www.linkedin.com/in/massimo-vasta-437a99336/";
@@ -150,55 +150,151 @@ function Navbar() {
 }
 
 // ── 2. HERO + VSL ─────────────────────────────────────────────────────────────
+/**
+ * Reproductor del VSL ("El lanzamiento", motion graphics de 44 s).
+ * Sin controles nativos: solo se puede pausar y reanudar. No se puede
+ * avanzar ni retroceder: ni hay barra que arrastrar, ni menu contextual,
+ * ni las teclas multimedia del sistema hacen nada, y cualquier salto que
+ * llegue por otra via se deshace al instante (evento `seeking`).
+ * Al terminar se puede volver a ver desde el principio.
+ */
+type EstadoVsl = "inicio" | "reproduciendo" | "pausado" | "fin";
+const ACCIONES_BLOQUEADAS: MediaSessionAction[] = ["seekbackward", "seekforward", "seekto", "previoustrack", "nexttrack"];
+
 function VslPlayer() {
   const ref = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
+  const ultimo = useRef(0);
+  const [estado, setEstado] = useState<EstadoVsl>("inicio");
+  const [progreso, setProgreso] = useState(0);
 
-  function play() {
+  useEffect(() => {
+    if (typeof navigator === "undefined" || !("mediaSession" in navigator)) return;
+    const ms = navigator.mediaSession;
+    for (const a of ACCIONES_BLOQUEADAS) {
+      try { ms.setActionHandler(a, () => {}); } catch { /* accion no soportada */ }
+    }
+    return () => {
+      for (const a of ACCIONES_BLOQUEADAS) {
+        try { ms.setActionHandler(a, null); } catch { /* accion no soportada */ }
+      }
+    };
+  }, []);
+
+  function alternar() {
     const v = ref.current;
     if (!v) return;
-    v.muted = false;
-    v.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+    if (v.paused) {
+      if (estado === "fin") {
+        ultimo.current = 0;
+        v.currentTime = 0;
+        setProgreso(0);
+      }
+      v.muted = false;
+      v.play().then(() => setEstado("reproduciendo")).catch(() => {});
+    } else {
+      v.pause();
+      setEstado("pausado");
+    }
+  }
+
+  function alAvanzar() {
+    const v = ref.current;
+    if (!v || v.seeking) return;
+    ultimo.current = v.currentTime;
+    setProgreso(v.duration ? v.currentTime / v.duration : 0);
+  }
+
+  // cualquier salto se deshace: el video vuelve a donde iba
+  function alSaltar() {
+    const v = ref.current;
+    if (v && Math.abs(v.currentTime - ultimo.current) > 0.25) v.currentTime = ultimo.current;
   }
 
   return (
     <div className="relative">
       {/* Ojo: sin .gemini-card — esa clase fuerza position:relative en sus hijos
           (globals.css) y rompe el inset-0 del botón de play. */}
-      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-black shadow-[0_0_60px_-15px_rgba(123,63,228,0.35)] aspect-video">
+      <div
+        className="group relative overflow-hidden rounded-3xl border border-white/10 bg-black shadow-[0_0_60px_-15px_rgba(123,63,228,0.35)] aspect-video"
+        onContextMenu={(e) => e.preventDefault()}
+      >
         <video
           ref={ref}
-          src="/vsl.mp4"
-          poster="/vsl-poster.jpg"
+          src="/vsl-lanzamiento.mp4"
+          poster="/vsl-lanzamiento-poster.jpg"
           playsInline
-          controls={playing}
-          onEnded={() => setPlaying(false)}
+          preload="metadata"
+          disablePictureInPicture
+          disableRemotePlayback
+          controlsList="nodownload noplaybackrate noremoteplayback nofullscreen"
+          onTimeUpdate={alAvanzar}
+          onSeeking={alSaltar}
+          onPause={() => setEstado((e) => (e === "reproduciendo" ? "pausado" : e))}
+          onEnded={() => setEstado("fin")}
           className="h-full w-full object-cover"
         />
 
-        {!playing && (
+        {estado === "inicio" && (
           <button
-            onClick={play}
+            onClick={alternar}
             aria-label="Reproducir el vídeo"
-            className="group absolute inset-0 flex flex-col items-center justify-center gap-4 bg-gradient-to-t from-black/85 via-black/40 to-black/25 transition hover:from-black/80"
+            className="group/play absolute inset-0 flex flex-col items-center justify-center gap-4 bg-gradient-to-t from-black/85 via-black/40 to-black/25 transition hover:from-black/80"
           >
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-black shadow-[0_0_40px_rgba(168,85,247,0.35)] transition group-hover:scale-105">
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-black shadow-[0_0_40px_rgba(168,85,247,0.35)] transition group-hover/play:scale-105">
               <Play className="h-6 w-6 translate-x-0.5 fill-black" />
             </span>
             <span className="text-sm font-medium text-white/90">
-              Ver el vídeo · 3 min
+              Ver el vídeo · 44 s
             </span>
             <span className="max-w-xs px-6 text-center text-xs leading-relaxed text-white/50">
               Te enseño por qué tu mejor anuncio se acaba muriendo y qué se hace en su lugar.
             </span>
           </button>
         )}
+
+        {estado !== "inicio" && (
+          <>
+            {/* toda la superficie pausa y reanuda */}
+            <button
+              onClick={alternar}
+              aria-label={estado === "reproduciendo" ? "Pausar el vídeo" : estado === "fin" ? "Volver a ver el vídeo" : "Reanudar el vídeo"}
+              className={`absolute inset-0 flex flex-col items-center justify-center gap-3 transition ${
+                estado === "reproduciendo" ? "bg-transparent" : "bg-black/45"
+              }`}
+            >
+              {estado !== "reproduciendo" && (
+                <>
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-black shadow-[0_0_40px_rgba(168,85,247,0.35)]">
+                    {estado === "fin" ? <RefreshCw className="h-6 w-6" /> : <Play className="h-6 w-6 translate-x-0.5 fill-black" />}
+                  </span>
+                  <span className="text-sm font-medium text-white/90">
+                    {estado === "fin" ? "Volver a verlo" : "Reanudar"}
+                  </span>
+                </>
+              )}
+            </button>
+
+            {/* barra inferior: solo pausa/reanuda; el progreso se ve pero no se toca */}
+            <div
+              className={`pointer-events-none absolute inset-x-0 bottom-0 flex items-center gap-3 bg-gradient-to-t from-black/70 to-transparent px-4 pb-3 pt-8 transition-opacity ${
+                estado === "reproduciendo" ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+              }`}
+            >
+              <button
+                onClick={alternar}
+                aria-label={estado === "reproduciendo" ? "Pausar el vídeo" : estado === "fin" ? "Volver a ver el vídeo" : "Reanudar el vídeo"}
+                className="pointer-events-auto flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/25"
+              >
+                {estado === "reproduciendo" ? <Pause className="h-4 w-4 fill-white" /> : <Play className="h-4 w-4 translate-x-px fill-white" />}
+              </button>
+              <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/15">
+                <div className="h-full rounded-full bg-gradient-to-r from-[#7B2FBE] to-[#A78BFA]" style={{ width: `${(progreso * 100).toFixed(2)}%` }} />
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
-      <div className="absolute -bottom-4 -right-4 hidden rounded-2xl border border-white/10 bg-black/85 px-4 py-3 text-xs backdrop-blur-xl sm:block">
-        <div className="text-white/40">Todo lo que ves</div>
-        <div className="mt-0.5 font-semibold text-white">está hecho con IA</div>
-      </div>
     </div>
   );
 }

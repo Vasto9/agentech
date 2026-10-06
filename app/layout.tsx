@@ -22,7 +22,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property="og:url" content="https://agenciatech.es" />
         <meta property="og:image" content="https://agenciatech.es/logo.png" />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="icon" href="/logo-agen.jpeg" />
       </head>
       <body className={`${geist.variable} antialiased`}>
         {children}
