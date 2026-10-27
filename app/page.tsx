@@ -11,7 +11,7 @@ import {
 // ── Constants ─────────────────────────────────────────────────────────────────
 const BRAND = "Agencia Tech";
 const CALENDLY = "https://calendly.com/agenciatech-ia/15min";
-const EMAIL = "massimo@agenciatech.es";
+const EMAIL = "info@agenciatech.es";
 const IG = "https://instagram.com/agenciatech__";
 const LINKEDIN = "https://www.linkedin.com/in/massimo-vasta-437a99336/";
 const DOSSIER = "https://agenciatech-demos.vercel.app";
@@ -439,11 +439,11 @@ function ProblemaSection() {
 // ── 4. SOLUCIÓN — el qué, nunca el cómo ───────────────────────────────────────
 function SolucionSection() {
   const deliverables = [
-    { icon: <Layers className="h-4 w-4" />, text: "Cuarenta anuncios al mes, no seis" },
-    { icon: <Package className="h-4 w-4" />, text: "Doce ángulos distintos, de público frío a recuperación de carritos" },
+    { icon: <Layers className="h-4 w-4" />, text: "Un plan de creatividades a medida de tu cuenta, no un pack cerrado" },
+    { icon: <Package className="h-4 w-4" />, text: "Los ángulos que tu cuenta necesita, de público frío a recuperación de carritos" },
     { icon: <Play className="h-4 w-4" />, text: "Vídeo y foto listos para publicar, en vertical y cuadrado" },
     { icon: <RefreshCw className="h-4 w-4" />, text: "Variantes de cada pieza sin volver a producir nada" },
-    { icon: <Zap className="h-4 w-4" />, text: "Tres días desde que aprobamos el plan" },
+    { icon: <Zap className="h-4 w-4" />, text: "Primer lote en menos de una semana desde que aprobamos el plan" },
     { icon: <Camera className="h-4 w-4" />, text: "Sin sesión de fotos, sin estudio y sin modelos" },
     { icon: <BookOpen className="h-4 w-4" />, text: "Producto físico, servicios, apps e infoproductos" },
   ];
@@ -468,7 +468,7 @@ function SolucionSection() {
           <SectionTitle
             label="Qué hacemos"
             title="Te damos más oportunidades de acertar"
-            subtitle="Nadie sabe de antemano cuál va a ganar. Con seis piezas tienes seis intentos. Con cuarenta tienes cuarenta. Eso es lo que compras."
+            subtitle="Nadie sabe de antemano cuál va a ganar. Cuantas más piezas distintas prueba tu cuenta, más probabilidades tienes de encontrarlo. Cuántas necesitas lo decidimos contigo después de estudiar tu caso."
           />
 
           <motion.ul variants={container} className="mt-8 space-y-3">
@@ -515,9 +515,9 @@ function SolucionSection() {
 // ── 5. COMPARATIVA ────────────────────────────────────────────────────────────
 function ComparativaSection() {
   const rows = [
-    { concept: "Anuncios nuevos al mes", tradicional: "6, con suerte", agencia: "40" },
-    { concept: "Tiempo hasta tenerlos", tradicional: "2–3 semanas", agencia: "3 días" },
-    { concept: "Ángulos distintos", tradicional: "1 o 2", agencia: "Los 12" },
+    { concept: "Anuncios nuevos al mes", tradicional: "6, con suerte", agencia: "Los que tu cuenta necesite" },
+    { concept: "Tiempo hasta tenerlos", tradicional: "2–3 semanas", agencia: "Menos de una semana" },
+    { concept: "Ángulos distintos", tradicional: "1 o 2", agencia: "Los que toquen en tu caso" },
     { concept: "Modelos y estudio", tradicional: "Los pagas aparte", agencia: "No hacen falta" },
     { concept: "Probar una variante", tradicional: "Volver a rodar", agencia: "Incluido" },
     { concept: "Compromiso", tradicional: "12 meses o más", agencia: "3 meses" },
@@ -593,12 +593,12 @@ function ComoFuncionaSection() {
     {
       number: "03",
       title: "Producimos",
-      desc: "Cuarenta piezas en tres días. Tú las pones a competir en tu cuenta; nosotros no tocamos tus campañas.",
+      desc: "Producimos el lote que acordamos en el plan, en menos de una semana. Tú lo pones a competir en tu cuenta; nosotros no tocamos tus campañas.",
     },
     {
       number: "04",
       title: "Leemos y multiplicamos",
-      desc: "Lo que gana se convierte en diez variantes el mes siguiente. Lo que no, se retira sin discusión.",
+      desc: "Lo que gana se convierte en varias variantes el mes siguiente. Lo que no, se retira sin discusión.",
     },
   ];
 
@@ -642,9 +642,9 @@ function ComoFuncionaSection() {
 // ── 7. GARANTÍA + EJEMPLOS ────────────────────────────────────────────────────
 function GarantiaSection() {
   const hechos = [
-    { value: "40", label: "anuncios nuevos cada mes" },
-    { value: "72h", label: "desde que apruebas el plan" },
-    { value: "12", label: "ángulos cubiertos, no uno" },
+    { value: "1", label: "plan a medida de tu cuenta" },
+    { value: "1", label: "aprobación tuya al mes" },
+    { value: "3", label: "meses de compromiso, no más" },
   ];
 
   return (
@@ -722,6 +722,37 @@ function GarantiaSection() {
   );
 }
 
+// ── 7b. TESTIMONIO ────────────────────────────────────────────────────────────
+function TestimonioSection() {
+  return (
+    <motion.section
+      id="testimonio"
+      variants={container}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.15 }}
+      className="mx-auto max-w-6xl px-5 py-16 md:py-24"
+    >
+      <SectionTitle label="Lo dice un cliente" title="Rafa Penadés, de EYSA, cuenta cómo le fue" />
+      <motion.div
+        variants={fadeUp}
+        className="gemini-card mx-auto mt-12 max-w-[320px] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl"
+      >
+        <div className="aspect-[9/16] bg-black">
+          <video
+            src="/testimonio-rafa-eysa.mp4"
+            controls
+            playsInline
+            preload="metadata"
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <div className="px-4 py-3 text-center text-xs text-white/60">Rafa Penadés · EYSA, fundas de sofá</div>
+      </motion.div>
+    </motion.section>
+  );
+}
+
 // ── 8. FAQ ────────────────────────────────────────────────────────────────────
 function FaqSection() {
   const faqs = [
@@ -737,7 +768,7 @@ function FaqSection() {
     },
     {
       q: "¿Solo trabajáis con producto físico?",
-      a: "No. Producto físico, servicios, apps e infoproductos. Lo que cambia es el ángulo, no el método: una app se enseña funcionando, un servicio se enseña por el resultado que deja y un producto se enseña en la mano. La lógica de producir cuarenta piezas y ver cuál gana es la misma.",
+      a: "No. Producto físico, servicios, apps e infoproductos. Lo que cambia es el ángulo, no el método: una app se enseña funcionando, un servicio se enseña por el resultado que deja y un producto se enseña en la mano. La lógica de producir muchas piezas distintas y ver cuál gana es la misma.",
     },
     {
       q: "Lo mío es muy concreto, ¿funciona igual?",
@@ -927,6 +958,8 @@ export default function Page() {
           <ComoFuncionaSection />
           <Divider />
           <GarantiaSection />
+          <Divider />
+          <TestimonioSection />
           <Divider />
           <FaqSection />
           <CtaFinalSection />
