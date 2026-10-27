@@ -520,9 +520,8 @@ function ComparativaSection() {
     { concept: "Ángulos distintos", tradicional: "1 o 2", agencia: "Los que toquen en tu caso" },
     { concept: "Modelos y estudio", tradicional: "Los pagas aparte", agencia: "No hacen falta" },
     { concept: "Probar una variante", tradicional: "Volver a rodar", agencia: "Incluido" },
-    { concept: "Compromiso", tradicional: "12 meses o más", agencia: "3 meses" },
   ];
-  const malas = ["6, con suerte", "1 o 2", "Los pagas aparte", "Volver a rodar", "12 meses o más"];
+  const malas = ["6, con suerte", "1 o 2", "Los pagas aparte", "Volver a rodar"];
 
   return (
     <motion.section
@@ -644,7 +643,7 @@ function GarantiaSection() {
   const hechos = [
     { value: "1", label: "plan a medida de tu cuenta" },
     { value: "1", label: "aprobación tuya al mes" },
-    { value: "3", label: "meses de compromiso, no más" },
+    { value: "30", label: "días para superar a tu mejor anuncio" },
   ];
 
   return (
@@ -776,7 +775,7 @@ function FaqSection() {
     },
     {
       q: "¿Cuánto cuesta?",
-      a: "Depende del volumen, y por eso lo hablamos en la llamada con tu caso delante. Lo que sí te digo ya: no trabajamos por pieza suelta y el compromiso mínimo son tres meses, porque en uno no da tiempo a que ningún test diga nada. Ahora bien, el riesgo no lo corres tú: si en los primeros treinta días de campaña no superamos tu mejor anuncio, puedes dejarlo ahí sin deber los meses restantes.",
+      a: "Depende del volumen, y por eso lo hablamos en la llamada con tu caso delante. Lo que sí te digo ya: no trabajamos por pieza suelta, sino con un plan a medida de tu cuenta. Ahora bien, el riesgo no lo corres tú: si en los primeros treinta días de campaña no superamos tu mejor anuncio, puedes dejarlo ahí sin deber los meses restantes.",
     },
     {
       q: "¿Y si no me gusta lo que sale?",
