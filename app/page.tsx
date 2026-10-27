@@ -220,8 +220,8 @@ function VslPlayer() {
       >
         <video
           ref={ref}
-          src="/vsl-lanzamiento.mp4"
-          poster="/vsl-lanzamiento-poster.jpg"
+          src="/vsl-lanzamiento-v4.mp4"
+          poster="/vsl-lanzamiento-v4-poster.jpg"
           playsInline
           preload="metadata"
           disablePictureInPicture
